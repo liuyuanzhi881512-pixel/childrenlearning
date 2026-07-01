@@ -88,8 +88,8 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 14px 16px;
-      margin: 18px 16px 12px;
+      padding: 12px 16px;
+      margin: 16px 16px 10px;
       background: linear-gradient(135deg, rgba(212,168,76,0.08) 0%, rgba(196,176,154,0.1) 100%);
       border-radius: 10px;
       border: 1px solid rgba(196,176,154,0.25);
@@ -107,48 +107,85 @@
 
     /* ===== 问题区域（图标网格）===== */
     .qa-section { padding: 4px 14px 8px; }
-    .qa-group { margin-bottom: 4px; }
+
+    .qa-group { margin-bottom: 6px; }
 
     .qa-group-title {
-      font-size: 17px;
-      color: #7A6E5D;
+      font-size: 15px;
+      color: #5A5045;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      padding: 16px 4px 10px;
+      letter-spacing: 0.3px;
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+      background: #fff;
+      border: 1.5px solid #E8E2DA;
+      box-shadow: 0 1px 4px rgba(60,50,40,0.04);
     }
 
-    .qa-group-title span {
+    .qa-group-title:active {
+      background: #FAF6F0;
+      border-color: #C4B09A;
+      transform: scale(0.98);
+    }
+
+    @media (hover: hover) {
+      .qa-group-title:hover {
+        background: #FBF8F4;
+        border-color: #D0C4B8;
+        box-shadow: 0 2px 8px rgba(60,50,40,0.07);
+      }
+    }
+
+    .qa-group-title span:first-child {
       font-weight: 400;
-      color: #A09080;
+      color: #A89880;
+      font-size: 12px;
+    }
+
+    .qa-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
       font-size: 13px;
+      color: #C4B09A;
+      background: #F7F2EC;
+      border-radius: 6px;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+      margin-left: auto;
+      line-height: 1;
+    }
+
+    .qa-group.collapsed .qa-arrow {
+      transform: rotate(-90deg);
     }
 
     .qa-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.25s ease,
+                  margin 0.25s ease;
+      max-height: 500px;
+      opacity: 1;
     }
 
-    .qa-card {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 20px;
-      text-align: center;
-      min-height: 56px;
-    }
-
-    .qa-card-icon { flex-shrink: 0; }
-
-    .qa-card-text {
-      text-align: center;
-    }
-
-    .qa-card-text sub {
-      display: inline;
+    .qa-group.collapsed .qa-grid {
+      max-height: 0 !important;
+      opacity: 0;
       margin-top: 0;
-      margin-left: 6px;
+      margin-bottom: 0;
     }
 
     .qa-card {
@@ -156,38 +193,38 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 4px;
       background: #fff;
       border: 1.5px solid #E8E2DA;
-      border-radius: 13px;
-      padding: 18px 12px 14px;
+      border-radius: 11px;
+      padding: 10px 6px 8px;
       cursor: pointer;
       transition: all 0.22s ease;
-      min-height: 80px;
+      min-height: 56px;
       -webkit-touch-callout: none;
       user-select: none;
       text-align: center;
     }
 
     .qa-card-icon {
-      font-size: 28px;
+      font-size: 20px;
       line-height: 1;
       flex-shrink: 0;
     }
 
     .qa-card-text {
-      font-size: 14px;
+      font-size: 12.5px;
       color: #3A3530;
       font-weight: 700;
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
     .qa-card-text sub {
       display: block;
-      font-size: 11px;
+      font-size: 10px;
       color: #999;
       font-weight: 400;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     .qa-card:active {
@@ -205,21 +242,27 @@
       }
     }
 
-    /* ===== 分隔线 ===== */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(196,176,154,0.3), transparent);
-      margin: 20px 24px 16px;
-    }
-
-    /* ===== 表单区域 ===== */
+    /* ===== 表单区域（视觉焦点）===== */
     .form-section {
-      margin: 4px 16px 24px;
+      margin: 8px 16px 24px;
       background: #fff;
       border-radius: 14px;
       padding: 26px 20px;
-      box-shadow: 0 1px 8px rgba(60,50,40,0.06);
+      box-shadow: 0 4px 20px rgba(60,50,40,0.1);
+      border: 1.5px solid rgba(196,176,154,0.5);
+      position: relative;
+      overflow: hidden;
       padding-bottom: max(26px, env(safe-area-inset-bottom, 26px));
+    }
+
+    .form-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #D4A84C, #C4B09A);
     }
 
     .form-header {
@@ -228,9 +271,9 @@
     }
 
     .form-header h2 {
-      font-size: 17px;
-      color: #3A3530;
-      font-weight: 600;
+      font-size: 18px;
+      color: #8B7355;
+      font-weight: 700;
       letter-spacing: 1px;
     }
 
@@ -251,8 +294,7 @@
       letter-spacing: 0.3px;
     }
 
-    .form-group input,
-    .form-group textarea {
+    .form-group input {
       width: 100%;
       padding: 13px 15px;
       border: 1.5px solid #E5DED6;
@@ -266,17 +308,69 @@
       -webkit-appearance: none;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
+    .form-group input:focus {
       border-color: #C4B09A;
       box-shadow: 0 0 0 3px rgba(196,176,154,0.12);
       background: #fff;
     }
 
-    .form-group textarea {
-      min-height: 110px;
-      resize: vertical;
+    /* ===== 文本框浮层引导（非实体）===== */
+    .textarea-wrapper {
+      position: relative;
+      padding: 13px 15px;
+      border: 1.5px solid #E5DED6;
+      border-radius: 10px;
+      background: #FAF8F5;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      min-height: 160px;
+    }
+
+    .textarea-wrapper:focus-within {
+      border-color: #C4B09A;
+      box-shadow: 0 0 0 3px rgba(196,176,154,0.12);
+      background: #fff;
+    }
+
+    .textarea-wrapper textarea {
+      width: 100%;
+      min-height: 130px;
+      border: none;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      font-size: 16px;
+      color: #333;
       line-height: 1.65;
+      font-family: inherit;
+      resize: vertical;
+      outline: none;
+      display: block;
+      position: relative;
+      z-index: 2;
+      -webkit-appearance: none;
+    }
+
+    .guide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 13px 15px;
+      pointer-events: none;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #B0A698;
+      background: transparent;
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    .guide-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
     }
 
     .submit-btn {
@@ -339,11 +433,11 @@
       .page-wrap { max-width: 520px; margin: 0 auto; }
       .hero { margin: 24px auto 0; }
       .hero-title { font-size: 30px; }
-      .qa-grid { gap: 12px; }
-      .qa-card { padding: 20px 14px 16px; min-height: 88px; }
-      .qa-card-icon { font-size: 32px; }
-      .qa-card-text { font-size: 15px; }
-      .qa-card-text sub { font-size: 12px; }
+      .qa-grid { gap: 9px; }
+      .qa-card { padding: 12px 8px 10px; min-height: 62px; border-radius: 12px; }
+      .qa-card-icon { font-size: 22px; }
+      .qa-card-text { font-size: 13.5px; }
+      .qa-card-text sub { font-size: 10.5px; }
     }
 
     /* ===== iPhone SE / 小屏 ===== */
@@ -351,16 +445,15 @@
       .hero { margin: 12px 10px 0; padding: 30px 18px 28px; }
       .hero-title { font-size: 22px; letter-spacing: 1.5px; }
       .hero-desc { font-size: 13px; }
-      .open-hint { margin: 14px 10px 10px; padding: 11px 12px; }
+      .open-hint { margin: 14px 10px 8px; padding: 11px 12px; }
       .open-hint-text { font-size: 12px; }
       .qa-section { padding: 2px 8px 6px; }
-      .qa-grid { gap: 7px; }
-      .qa-card { padding: 14px 8px 11px; min-height: 70px; border-radius: 11px; }
-      .qa-card-icon { font-size: 24px; }
-      .qa-card-text { font-size: 13px; }
-      .qa-card-text sub { font-size: 10px; }
-      .qa-group-title { font-size: 15px; padding: 12px 4px 8px; }
-      .divider { margin: 16px 16px 12px; }
+      .qa-grid { gap: 5px; }
+      .qa-card { padding: 8px 4px 6px; min-height: 50px; border-radius: 10px; }
+      .qa-card-icon { font-size: 18px; }
+      .qa-card-text { font-size: 11.5px; }
+      .qa-card-text sub { font-size: 9px; }
+      .qa-group-title { font-size: 14px; padding: 10px 12px; }
       .form-section { margin: 4px 10px 20px; padding: 22px 16px; }
     }
 
@@ -375,14 +468,13 @@
       .hero-title { font-size: 20px; }
       .hero-desc { display: none; }
       .open-hint { margin: 10px 12px 6px; padding: 8px 12px; }
-      .qa-group { margin-bottom: 2px; }
-      .qa-group-title { padding: 8px 4px 4px; font-size: 14px; }
-      .qa-grid { gap: 6px; }
-      .qa-card { padding: 10px 8px 8px; min-height: 56px; }
-      .qa-card-icon { font-size: 22px; }
-      .qa-card-text { font-size: 12px; }
-      .qa-card-text sub { font-size: 10px; }
-      .divider { margin: 10px 16px 8px; }
+      .qa-group { margin-bottom: 4px; }
+      .qa-group-title { padding: 8px 12px; font-size: 14px; }
+      .qa-grid { gap: 5px; grid-template-columns: repeat(3, 1fr); }
+      .qa-card { padding: 6px 4px 5px; min-height: 44px; border-radius: 9px; }
+      .qa-card-icon { font-size: 17px; }
+      .qa-card-text { font-size: 11px; }
+      .qa-card-text sub { display: none; }
       .form-section { margin-bottom: 10px; padding: 18px 16px; }
     }
 
@@ -411,18 +503,18 @@
     <section class="qa-section">
 
       <!-- 国外留学 -->
-      <div class="qa-group">
-        <div class="qa-group-title">国外留学</div>
+      <div class="qa-group collapsed">
+        <div class="qa-group-title">国外留学<span class="qa-arrow">▾</span></div>
         <div class="qa-grid">
-          <div class="qa-card" data-cat="国外留学">
+          <div class="qa-card" data-cat="国外留学" data-placeholder="例如：要访问哪国签证官网（美/英/加/澳等）|例如：具体打不开的表现（白屏/超时/403）|例如：用的什么网络（家里宽带/手机热点）|例如：是否需要长期稳定访问方案">
             <span class="qa-card-icon">🌐</span>
             <span class="qa-card-text">签证网站访问<sub>打不开签证官网</sub></span>
           </div>
-          <div class="qa-card" data-cat="国外留学">
+          <div class="qa-card" data-cat="国外留学" data-placeholder="例如：哪个考试（雅思/托福/GRE/GMAT）|例如：报错信息是___，卡在报名还是查分|例如：用电脑还是手机打开|例如：是否需协助换浏览器/清缓存">
             <span class="qa-card-icon">📝</span>
             <span class="qa-card-text">考试网站异常<sub>无法打开报名/查分</sub></span>
           </div>
-          <div class="qa-card" data-cat="国外留学">
+          <div class="qa-card" data-cat="国外留学" data-placeholder="例如：用的什么软件（Canvas/Blackboard/学校系统）|例如：报错提示是___|例如：是国内还是海外账号|例如：是否多人共用同一账号">
             <span class="qa-card-icon">💻</span>
             <span class="qa-card-text">学习软件登录<sub>账号登陆失败</sub></span>
           </div>
@@ -430,37 +522,37 @@
       </div>
 
       <!-- 国内教育 -->
-      <div class="qa-group">
-        <div class="qa-group-title">国内教育</div>
+      <div class="qa-group collapsed">
+        <div class="qa-group-title">国内教育<span class="qa-arrow">▾</span></div>
         <div class="qa-grid">
-          <div class="qa-card" data-cat="国内教育">
+          <div class="qa-card" data-cat="国内教育" data-placeholder="例如：孩子用的设备（手机/平板/游戏机）|例如：想管控（游戏/短视频/支付）哪类|例如：孩子年龄___岁，希望限时还是禁入|例如：是否要微信/支付宝的青少年模式">
             <span class="qa-card-icon">🛡️</span>
             <span class="qa-card-text">防沉迷系统<sub>如何设置家长管控</sub></span>
           </div>
-          <div class="qa-card" data-cat="国内教育">
+          <div class="qa-card" data-cat="国内教育" data-placeholder="例如：用途（网课/阅读/画画）|例如：预算约___，偏好（墨水屏/类纸屏）|例如：尺寸大概___寸|例如：连接电脑还是独立使用">
             <span class="qa-card-icon">👓</span>
             <span class="qa-card-text">护眼设备选购<sub>学习屏幕推荐</sub></span>
           </div>
-          <div class="qa-card" data-cat="国内教育">
+          <div class="qa-card" data-cat="国内教育" data-placeholder="例如：主要打（作业/照片/资料）|例如：偏好（喷墨/激光），预算约___|例如：需要无线打印还是插线|例如：家里几口人共用">
             <span class="qa-card-icon">🖨️</span>
             <span class="qa-card-text">家庭打印机<sub>哪款适合家用</sub></span>
           </div>
         </div>
       </div>
 
-      <!-- 其他扩展（开放式暗示） -->
-      <div class="qa-group">
-        <div class="qa-group-title">其他 <span>（未列出请补充在下方）</span></div>
+      <!-- 其他 -->
+      <div class="qa-group collapsed">
+        <div class="qa-group-title">其他 <span>（未列出请补充在下方）</span><span class="qa-arrow">▾</span></div>
         <div class="qa-grid">
-          <div class="qa-card" data-cat="其他">
+          <div class="qa-card" data-cat="其他" data-placeholder="例如：孩子年级___，主要上网课/写作业|例如：预算约___，倾向（笔记本/平板+笔）|例如：要不要兼顾轻度游戏|例如：品牌有无偏好">
             <span class="qa-card-icon">📚</span>
             <span class="qa-card-text">网课设备配置<sub>电脑/平板选型</sub></span>
           </div>
-          <div class="qa-card" data-cat="其他">
+          <div class="qa-card" data-cat="其他" data-placeholder="例如：学校___，宿舍WiFi经常___（掉线/限速）|例如：是否需要校园VPN配置帮助|例如：设备___台同时连|例如：是否要自建热点方案">
             <span class="qa-card-icon">🔗</span>
             <span class="qa-card-text">校园网络问题<sub>宿舍WiFi/VPN</sub></span>
           </div>
-          <div class="qa-card" data-cat="其他">
+          <div class="qa-card" data-cat="其他" data-placeholder="例如：孩子学段___，想要（笔记/背单词/时间管理）类|例如：用iOS还是安卓|例如：免费为主还是愿付费|例如：要不要和电脑端同步">
             <span class="qa-card-icon">📱</span>
             <span class="qa-card-text">学习App推荐<sub>效率工具/笔记</sub></span>
           </div>
@@ -469,25 +561,21 @@
 
     </section>
 
-    <!-- 分隔线 -->
-    <div class="divider"></div>
-
     <!-- 表单 -->
     <section class="form-section" id="formSection">
       <div class="form-header">
-        <h2>提交您的需求</h2>
+        <h2>描述您的需求</h2>
         <p>专员将在收到后尽快联系您</p>
       </div>
       <form id="applyForm">
         <div class="form-group">
-          <label for="name">您的企业微信英文名 *</label>
-          <input type="text" id="name" name="name" placeholder="例：patfootliu" autocomplete="name" required>
-        </div>
-        <div class="form-group">
           <label for="description">问题描述 *</label>
-          <textarea id="description" name="description" placeholder="请详细描述您遇到的子女学习相关问题或需求，专员将联系您跟进&#10;&#10;例如：孩子申请留学时打不开签证网站..." required></textarea>
+          <div class="textarea-wrapper">
+            <textarea id="description" name="description" placeholder="" required></textarea>
+            <div class="guide-overlay hidden" id="guideOverlay"></div>
+          </div>
         </div>
-        <button type="submit" class="submit-btn" id="submitBtn">提 交</button>
+        <button type="submit" class="submit-btn" id="submitBtn">通知专员</button>
       </form>
     </section>
 
@@ -499,7 +587,7 @@
 
   <script>
     // SCF 函数地址（部署后替换）
-    const WEBHOOK_URL = 'https://{YOUR_SCF_FUNCTION_URL}';
+    const WEBHOOK_URL = 'https://1257899736-i97z1szf8z.ap-guangzhou.tencentcf.com';
 
     // iOS 100vh fix
     function fixViewportHeight() {
@@ -516,24 +604,39 @@
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
+    const descField = document.getElementById('description');
+    const guideOverlay = document.getElementById('guideOverlay');
+
+    // 浮层显隐控制：文本框为空且未聚焦时显示引导
+    function updateGuideVisibility() {
+      if (descField.value.trim() === '' && document.activeElement !== descField) {
+        guideOverlay.classList.remove('hidden');
+      } else {
+        guideOverlay.classList.add('hidden');
+      }
+    }
+
+    descField.addEventListener('focus', () => guideOverlay.classList.add('hidden'));
+    descField.addEventListener('input', () => guideOverlay.classList.add('hidden'));
+    descField.addEventListener('blur', updateGuideVisibility);
+
     // 表单提交
     document.getElementById('applyForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
-      const name = document.getElementById('name').value.trim();
       const desc = document.getElementById('description').value.trim();
 
-      if (!name || !desc) {
-        showToast('请填写完整信息', 'error');
+      if (!desc) {
+        showToast('请描述您的需求', 'error');
         return;
       }
-      if (WEBHOOK_URL.includes('{YOUR_SCF_FUNCTION_URL}') || !WEBHOOK_URL) {
+      if (!WEBHOOK_URL) {
         showToast('服务尚未就绪，请联系管理员', 'error');
         return;
       }
 
       btn.disabled = true;
-      btn.textContent = '提交中...';
+      btn.textContent = '通知中...';
 
       try {
         const timeStr = new Date().toLocaleString('zh-CN');
@@ -542,7 +645,6 @@
           markdown: {
             content:
               '**📚 子女学习新咨询**\n\n' +
-              '> **称呼：**' + name + '\n' +
               '> **时间：**' + timeStr + '\n' +
               '> **描述：**\n> ' + desc.replace(/\n/g, '\n> ') + '\n\n' +
               '---\n' +
@@ -560,6 +662,7 @@
         if (result.errcode === 0 || result.errno === 0) {
           showToast('✅ 提交成功！专员会尽快联系您');
           document.getElementById('applyForm').reset();
+          updateGuideVisibility();
         } else {
           showToast(result.errmsg || '提交失败，请稍后重试', 'error');
         }
@@ -568,29 +671,43 @@
         showToast('网络错误，请检查连接后重试', 'error');
       } finally {
         btn.disabled = false;
-        btn.textContent = '提 交';
+        btn.textContent = '通知专员';
       }
     });
 
-    // 卡片点击 → 填入表单
-    function fillQuestion(categoryName, questionText) {
-      const descField = document.getElementById('description');
-      const text = '【' + categoryName + '】' + questionText;
+    // 折叠分组：点击标题切换展开/收起
+    document.querySelectorAll('.qa-group-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const group = title.parentElement;
+        const grid = group.querySelector('.qa-grid');
+        const wasCollapsed = group.classList.contains('collapsed');
 
-      descField.value = descField.value.trim()
-        ? descField.value + '\n\n' + text
-        : text;
+        if (wasCollapsed) {
+          group.classList.remove('collapsed');
+          grid.style.maxHeight = grid.scrollHeight + 'px';
+          setTimeout(() => { grid.style.maxHeight = ''; }, 360);
+        } else {
+          grid.style.maxHeight = grid.scrollHeight + 'px';
+          requestAnimationFrame(() => {
+            group.classList.add('collapsed');
+            grid.style.maxHeight = '';
+          });
+        }
+      });
+    });
 
-      document.getElementById('formSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setTimeout(() => descField.focus(), 450);
-    }
-
-    // 绑定所有卡片点击
+    // 卡片点击 → 显示对应浮层引导（非实体，用户一点就消失）
     document.querySelectorAll('.qa-card').forEach(card => {
       card.addEventListener('click', () => {
         const textEl = card.querySelector('.qa-card-text');
         const mainTitle = textEl.childNodes[0].textContent.trim();
-        fillQuestion(card.dataset.cat || '其他', mainTitle);
+        const placeholder = card.dataset.placeholder || '';
+        const guideHtml = placeholder.replace(/\|/g, '<br>');
+
+        guideOverlay.innerHTML = '<strong style="color:#D4A84C;">' + mainTitle + '</strong><br><br>' + guideHtml;
+        guideOverlay.classList.remove('hidden');
+        descField.value = '';
+        document.getElementById('formSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
   </script>
